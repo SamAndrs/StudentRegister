@@ -26,16 +26,8 @@ namespace StudentRegister
 
         public Object FindByID(int sID)
         {
-            try
-            {
-                var findStudent = _context.Students.Where(s => s.StudentId == sID).FirstOrDefault();
-                return findStudent;
-            }
-            catch
-            {
-                Console.WriteLine("## ERROR ##: Invalid student ID!");
-                return null;
-            } 
+            var findStudent = _context.Students.Where(s => s.StudentId == sID).FirstOrDefault();
+            return findStudent;
         }// End FindByID()
 
         public List<Student> FindByFirstName(string name)

@@ -27,7 +27,7 @@ namespace StudentRegister
 
         public override string ToString()
         {
-            return $"{StudentId} {FirstName} {LastName} {City}";
+            return string.Format("{0, -8}{1,-15}{2,-25}{3,-10}","{StudentId} {FirstName} {LastName} {City}");
         }
     }
 }

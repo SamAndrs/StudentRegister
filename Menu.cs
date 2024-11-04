@@ -57,15 +57,15 @@ namespace StudentRegister
                                 case "1": // ** Enter ID:
                                     Console.Write("\nPlease enter student ID: ");
                                     Int32.TryParse(Console.ReadLine(), out int id);
-                                    try
+
+                                    if (_manager.GetStudentByID(id) != null)
                                     {
                                         Console.WriteLine(_manager.GetStudentByID(id));
                                     }
-                                    catch
+                                    else
                                     {
                                         Console.WriteLine("## ERROR ## Invalid ID, or student doesn't exist!");
                                     }
-
                                     Console.ReadLine();
                                     break;
 
@@ -108,18 +108,18 @@ namespace StudentRegister
                     case "2": // Add New Student
                         bool twoActive = true;
 
-                        string[] newData = new string[3];
+                        List<string> newData = new List<string>();
 
                         while (twoActive)
                         {
                             Console.Clear();
                             Console.WriteLine("---- Register New Student ----\n");
                             Console.Write("\nAdd Student First Name: ");
-                            newData[0] = Console.ReadLine(); // ReadStringInput();
+                            newData.Add(Console.ReadLine()); // ReadStringInput();
                             Console.Write("\nAdd Student Last Name: ");
-                            newData[1] = Console.ReadLine(); //ReadStringInput();
+                            newData.Add(Console.ReadLine()); //ReadStringInput();
                             Console.Write("\nAdd Student City: ");
-                            newData[2] = Console.ReadLine(); // ReadStringInput();
+                            newData.Add(Console.ReadLine()); // ReadStringInput();
 
                             _manager.RegisterNewStudent(newData[0], newData[1], newData[2]);
 
@@ -129,15 +129,14 @@ namespace StudentRegister
                         }
                         break;
                     case "3": // Edit Student Data
-                        Student id_Student = new Student();
+
                         Console.Clear();
                         Console.WriteLine("---- Change Student Information ----\n");
                         Console.Write("\n Enter Student ID: ");
                         //if (Int32.TryParse(ReadStringInput(), out int sID))
                         if (Int32.TryParse(Console.ReadLine(), out int sID))
                         {
-                            id_Student = _manager.GetStudentByID(sID);
-                            Console.WriteLine(id_Student.ToString());
+
                         }
                         else
                         {
@@ -156,7 +155,7 @@ namespace StudentRegister
                             {
                                 case "1":
                                     Console.Write("\nEnter new student First Name: ");
-                                    id_Student.FirstName = Console.ReadLine();//ReadStringInput();
+                                    //id_Student.FirstName = Console.ReadLine();//ReadStringInput();
                                     //** Change Studentlist.AT(Student);
                                     break;
                                 case "2":
