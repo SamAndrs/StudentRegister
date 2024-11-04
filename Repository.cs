@@ -19,49 +19,47 @@ namespace StudentRegister
             _context = dbContext;
         }
 
-        public List<T> SelectAll<T>()
+        public void SelectAll()
         {
-            // StudentList? = _context.Students.Select(s => s).OrderByDescending(s => s.LastName).ToList();
-
-            List<T> fakeList = new List<T>();
-            return fakeList;
-        }
+            StudentList = _context.Students.Select(s => s).OrderByDescending(s => s.LastName).ToList();
+        }// End SelectAll()
 
         public Object FindByID(int sID)
         {
-            // var findStudent = _context.Students.Where(s => s.StudentId == sID).FirstOrDefault();
-            Student fakeStudent = new Student("", "", "");
-            return fakeStudent;
-        }
+            try
+            {
+                var findStudent = _context.Students.Where(s => s.StudentId == sID).FirstOrDefault();
+                return findStudent;
+            }
+            catch
+            {
+                Console.WriteLine("## ERROR ##: Invalid student ID!");
+                return null;
+            } 
+        }// End FindByID()
 
         public List<Student> FindByFirstName(string name)
         {
-            // StudentList? = _context.Students.Where(s=> s.FirstName == name).OrderByDescending(n=> n.LastName).ToList();
-            List<Student> fakeList = new List<Student>();
-            return fakeList;
-        }
+            return _context.Students.Where(s=> s.FirstName == name).OrderByDescending(n=> n.LastName).ToList();
+        }// END FindByFirstName()
 
         public List<Student> FindByLastName(string name)
         {
-            // StudentList? = _context.Students.Where(s=> s.LastName == name).OrderByDescending(n=> n.FirstName).ToList();
-            List<Student> fakeList = new List<Student>();
-            return fakeList;
-        }
+            return _context.Students.Where(s => s.LastName == name).OrderByDescending(n => n.FirstName).ToList();
+        }// End FindByLastName()
 
         public List<Student> FindByCity(string city)
         {
-            // StudentList? = _context.Students.Where(s=> s.City == city).OrderByDescending(n=> n.LastName).ToList();
-            List<Student> fakeList = new List<Student>();
-            return fakeList;
-        }
+            return _context.Students.Where(s => s.City == city).OrderByDescending(n => n.LastName).ToList();
+        }// End FindByCity()
 
-        public bool CreateNew()   //(string fName, string lName, string cName)
+        public bool CreateNew(List<string> newData)  //-->(string fName, string lName, string cName)
         {
-            //Student newStudent = new Student(fName, lName, cName);
+            Student newStudent = new Student(newData[0], newData[1], newData[2]);
             try
             {
-                // _context.Students.Add(newStudent);
-                // _context.SaveChanges();
+                _context.Students.Add(newStudent);
+                _context.SaveChanges();
                 return true;
             }
             catch
@@ -69,26 +67,26 @@ namespace StudentRegister
                 Console.WriteLine("## ERROR ##: Unable to add new post!");
                 return false;
             }
-        }
+        }// End CreateNew()
 
         public bool Update(int sID)
         {
-            /*var studentToUpdate = _context.Students.First(s=> s.studentId == sID);
+            var studentToUpdate = _context.Students.First(s=> s.StudentId == sID);
             
             if(studentToUpdate != null)
             {
                 _context.Students.Update(studentToUpdate);
                 _context.SaveChanges();
                 return true;
-            }*/
+            }
             Console.WriteLine("## ERROR ##: Could not update post. Not a valid ID!");
             return false;
-        }
+        }// End Update()
 
         public bool Remove(int sID)
         {
             // int toDelete = (int)_context.Students.SelectedItem(sID);
-            /*
+            
             var studentToDelete = _context.Students.First(s => s.StudentId == sID);
 
             if(studentToDelete != null)
@@ -97,10 +95,10 @@ namespace StudentRegister
                     _context.SaveChanges();
                     return true;
                 
-            }*/
+            }
             Console.WriteLine("## ERROR ##: Unable to delete post. Not a valid ID!");
             return false;
 
-        }
+        }// End Remove()
     }
 }

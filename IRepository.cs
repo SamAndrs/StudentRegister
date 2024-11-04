@@ -8,11 +8,11 @@ namespace StudentRegister
 {
     public interface IRepository
     {
-        public List<T> SelectAll<T>();
+        public void SelectAll();
 
         public Object FindByID(int sID);
 
-        public bool CreateNew();
+        public bool CreateNew(List<string> objData);
 
         public bool Update(int sID);
 
