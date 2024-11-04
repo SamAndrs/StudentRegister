@@ -11,7 +11,7 @@ namespace StudentRegister
         private StudentContext _context;
 
         public List<Student>? StudentList { get; set; }
-
+        
 
 
         public Repository(StudentContext dbContext)

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace StudentRegister
 {
-    public class StudentContext // : DbContext
+    public class StudentContext : DbContext
     {
-        /*
+
         private string _connectionString = "";
 
         public DbSet<Student>? Students { get; set; }
@@ -17,19 +18,19 @@ namespace StudentRegister
         {
             optionsBuilder.UseSqlServer(_connectionString);
         }
-    }
-         
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Student>().HasData(
-            new Student {FirstName = "Samuel", LastName = "Andersson", City = "Örebro"},
-            new Student {FirstName = "Fredrik", LastName = "Milton", City = "Örebro"},
-            new Student {FirstName = "Sven", LastName = "Tumba", City = "Stockholm"},
-            new Student {FirstName = "Robert", LastName = "Johansson", City = "Karlstad"},
+
+               new Student("Samuel", "Andersson", "Örebro"),
+                new Student("Fredrik", "Milton", "Örebro"),
+                new Student("Sven", "Tumba", "Stockholm"),
+                new Student("Robert", "Johansson", "Karlstad")
             );
         }
-         
-         */
+
+
     }
 }
 
