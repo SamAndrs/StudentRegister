@@ -121,7 +121,7 @@ namespace StudentRegister
                             Console.Write("\nAdd Student City: ");
                             newData.Add(Console.ReadLine()); // ReadStringInput();
 
-                            _manager.RegisterNewStudent(newData[0], newData[1], newData[2]);
+                            _manager.RegisterNewStudent(newData);
 
                             Console.WriteLine($"\nNew Student: {newData[0]} registered.");
                             Console.ReadLine();
@@ -133,49 +133,52 @@ namespace StudentRegister
                         Console.Clear();
                         Console.WriteLine("---- Change Student Information ----\n");
                         Console.Write("\n Enter Student ID: ");
-                        //if (Int32.TryParse(ReadStringInput(), out int sID))
                         if (Int32.TryParse(Console.ReadLine(), out int sID))
                         {
+                            Student toUpdate = _manager.GetStudentByID(sID);
+                            Console.WriteLine("This Student: " + toUpdate);
+                            bool editData = true;
+                            while (editData)
+                            {
+                                Console.WriteLine("Change what information?\n");
+                                Console.WriteLine("1. Change Student First Name");
+                                Console.WriteLine("2. Change Student Last Name");
+                                Console.WriteLine("3. Change Student City");
+                                Console.WriteLine("Q. Abort.");
 
+                                switch (ReadStringInput().ToUpper())
+                                {
+                                    case "1":
+                                        Console.Write("\nEnter new student First Name: ");
+                                        _manager.ChangeStudentFirstName(toUpdate, Console.ReadLine());
+                                        Console.WriteLine($"Name of Student {toUpdate.StudentId} changed to: {toUpdate.FirstName} {toUpdate.LastName}");
+                                        break;
+                                    case "2":
+                                        Console.Write("\nEnter new student Last Name: ");
+                                        _manager.ChangeStudentLastName(toUpdate, Console.ReadLine());
+                                        Console.WriteLine($"Last Name of Student {toUpdate.StudentId}: {toUpdate.FirstName} changed to {toUpdate.LastName}");
+                                        break;
+                                    case "3":
+                                        Console.Write("\nEnter new student City: ");
+                                        _manager.ChangeStudentCity(toUpdate, Console.ReadLine());
+                                        Console.WriteLine($"City of Student {toUpdate.StudentId}: {toUpdate.FirstName} {toUpdate.LastName} changed to: {toUpdate.City}");
+                                        break;
+                                    case "Q":
+                                        Console.WriteLine("Aborting.");
+                                        Console.ReadLine();
+                                        editData = false;
+                                        break;
+                                    default:
+                                        Console.WriteLine("## ERROR ##: Please enter a valid menu option!");
+                                        break;
+                                }
+                            }
                         }
                         else
                         {
                             Console.WriteLine("## ERROR ##: Please enter a valid Student ID!");
                         }
-                        bool editData = true;
-                        while (editData)
-                        {
-                            Console.WriteLine("Change what information?\n");
-                            Console.WriteLine("1. Change Student First Name");
-                            Console.WriteLine("2. Change Student Last Name");
-                            Console.WriteLine("3. Change Student City");
-                            Console.WriteLine("Q. Abort.");
-
-                            switch (ReadStringInput().ToUpper())
-                            {
-                                case "1":
-                                    Console.Write("\nEnter new student First Name: ");
-                                    //id_Student.FirstName = Console.ReadLine();//ReadStringInput();
-                                    //** Change Studentlist.AT(Student);
-                                    break;
-                                case "2":
-                                    //** Student.LastName = ReadStringInput();
-                                    //** Change Studentlist.AT(Student);
-                                    break;
-                                case "3":
-                                    //** Student.City = ReadStringInput();
-                                    //** Change Studentlist.AT(Student);
-                                    break;
-                                case "Q":
-                                    Console.WriteLine("Aborting.");
-                                    Console.ReadLine();
-                                    editData = false;
-                                    break;
-                                default:
-                                    Console.WriteLine("## ERROR ##: Please enter a valid menu option!");
-                                    break;
-                            }
-                        }
+                        
                         break;
                     case "Q": // Quit Application
                         Console.WriteLine("Closing Program");

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -63,11 +64,23 @@ namespace StudentRegister
             _studentRepo.CreateNew(data);
         }// End RegisterNewStudent()
 
-        public void ChangeStudentFirstName(Repository thisRepo, int studentID)
+        public void ChangeStudentFirstName(Student thisStudent, string updateData)
         {
-            thisRepo.StudentList.ElementAt(studentID).FirstName = Console.ReadLine();
+            thisStudent.FirstName = updateData;
+            _studentRepo.Update(thisStudent);
         }// End ChangeStudentFirstName()
 
+        public void ChangeStudentLastName(Student thisStudent, string updateData)
+        {
+            thisStudent.LastName = updateData;
+            _studentRepo.Update(thisStudent);
+        }// End ChangeStudentLastName()
+
+        public void ChangeStudentCity(Student thisStudent, string updateData)
+        {
+            thisStudent.City = updateData;
+            _studentRepo.Update(thisStudent);
+        }// End ChangeStudentCity()
 
     }
 }

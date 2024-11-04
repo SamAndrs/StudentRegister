@@ -61,13 +61,13 @@ namespace StudentRegister
             }
         }// End CreateNew()
 
-        public bool Update(int sID)
+        public bool Update(Student thisStudent)
         {
-            var studentToUpdate = _context.Students.First(s=> s.StudentId == sID);
+            //var studentToUpdate = _context.Students.First(s=> s.StudentId == sID);
             
-            if(studentToUpdate != null)
+            if(thisStudent != null)
             {
-                _context.Students.Update(studentToUpdate);
+                _context.Students.Update(thisStudent);
                 _context.SaveChanges();
                 return true;
             }
