@@ -21,16 +21,7 @@ namespace StudentRegister
 
             while (active)
             {
-                Console.Clear();
-                Console.WriteLine($"---- Menu ---- ");
-                Console.WriteLine("1. List All Students");
-                Console.WriteLine("2. Add New Student");
-                Console.WriteLine("3. Edit Student Data\n");
-                Console.WriteLine("Q. Quit Application shop\n");
-
-                Console.Write("-> ");
-
-
+                PrintMainMenu();
                 //switch(ReadStringInput().ToUpper())
                 switch (Console.ReadLine().ToUpper())
                 {
@@ -38,62 +29,24 @@ namespace StudentRegister
                         bool oneActive = true;
                         while (oneActive)
                         {
-                            Console.Clear();
-                            Console.WriteLine("{0, -8}{1,-15}{2,-25}{3,-10}", "ID", "First Name", "Last Name", "City");
-                            Console.WriteLine(new string('=', 60) + "\n");
-                            // ** List All Students
-                            _manager.PrintStudentList();
-                            Console.WriteLine("\n1. Find Student By ID");
-                            Console.WriteLine("2. List Students With First Name");
-                            Console.WriteLine("3. List Students With Last Name");
-                            Console.WriteLine("4. List Students From City\n");
-                            Console.WriteLine("Q. Return to Main Menu\n");
-
-                            Console.Write("-> ");
-
+                            ListAllMenu();
                             //switch(ReadStringInput().ToUpper())
                             switch (Console.ReadLine().ToUpper())
                             {
-                                case "1": // ** Enter ID:
-                                    Console.Write("\nPlease enter student ID: ");
-                                    Int32.TryParse(Console.ReadLine(), out int id);
-
-                                    if (_manager.GetStudentByID(id) != null)
-                                    {
-                                        Console.WriteLine(_manager.GetStudentByID(id));
-                                    }
-                                    else
-                                    {
-                                        Console.WriteLine("## ERROR ## Invalid ID, or student doesn't exist!");
-                                    }
-                                    Console.ReadLine();
+                                case "1": // Search by ID
+                                    SearchByID();
                                     break;
 
-                                case "2": // ** Enter First Name
-                                    Console.Write("\nPlease enter student First Name, to search: ");
-                                    foreach (var student in _manager.GetStundentsByFirstName(Console.ReadLine()))
-                                    {
-                                        Console.WriteLine(student);
-                                    }
-                                    Console.ReadLine();
+                                case "2": // Search by First Name
+                                    SearchByFirstName();
                                     break;
 
-                                case "3": // ** Enter Last Name
-                                    Console.Write("\nPlease enter student Last Name, to search: ");
-                                    foreach (var student in _manager.GetStundentsByLastName(Console.ReadLine()))
-                                    {
-                                        Console.WriteLine(student);
-                                    }
-                                    Console.ReadLine();
+                                case "3": // Search by Last Name
+                                    SearchByLastName();
                                     break;
 
-                                case "4": //** Enter City
-                                    Console.Write("\nPlease enter student City, to search: ");
-                                    foreach (var student in _manager.GetStundentsByCity(Console.ReadLine()))
-                                    {
-                                        Console.WriteLine(student);
-                                    }
-                                    Console.ReadLine();
+                                case "4": //Search by City Name
+                                    SearchByCity();
                                     break;
 
                                 case "Q":
@@ -192,6 +145,80 @@ namespace StudentRegister
                 }
             }
         }// End PrintMenu()
+
+        private void ListAllMenu()
+        {
+            Console.Clear();
+            Console.WriteLine("{0, -8}{1,-15}{2,-25}{3,-10}", "ID", "First Name", "Last Name", "City");
+            Console.WriteLine(new string('=', 60) + "\n");
+            // List All Students
+            _manager.PrintStudentList();
+            Console.WriteLine("\n1. Find Student By ID");
+            Console.WriteLine("2. List Students With First Name");
+            Console.WriteLine("3. List Students With Last Name");
+            Console.WriteLine("4. List Students From City\n");
+            Console.WriteLine("Q. Return to Main Menu\n");
+
+            Console.Write("-> ");
+        }// End ListAllMenu()
+
+        private void PrintMainMenu()
+        {
+            Console.Clear();
+            Console.WriteLine($"---- Menu ---- ");
+            Console.WriteLine("1. List All Students");
+            Console.WriteLine("2. Add New Student");
+            Console.WriteLine("3. Edit Student Data\n");
+            Console.WriteLine("Q. Quit Application shop\n");
+
+            Console.Write("-> ");
+        }
+
+        private void SearchByID()
+        {
+            Console.Write("\nPlease enter student ID: ");
+            Int32.TryParse(Console.ReadLine(), out int id);
+
+            if (_manager.GetStudentByID(id) != null)
+            {
+                Console.WriteLine(_manager.GetStudentByID(id));
+            }
+            else
+            {
+                Console.WriteLine("## ERROR ## Invalid ID, or student doesn't exist!");
+            }
+            Console.ReadLine();
+        }// End SearchByID()
+
+        private void SearchByFirstName()
+        {
+            Console.Write("\nPlease enter student First Name, to search: ");
+            foreach (var student in _manager.GetStundentsByFirstName(Console.ReadLine()))
+            {
+                Console.WriteLine(student);
+            }
+            Console.ReadLine();
+        }// End SearchByFirstName()
+
+        private void SearchByLastName()
+        {
+            Console.Write("\nPlease enter student Last Name, to search: ");
+            foreach (var student in _manager.GetStundentsByLastName(Console.ReadLine()))
+            {
+                Console.WriteLine(student);
+            }
+            Console.ReadLine();
+        }// End SearchByLastName()
+
+        private void SearchByCity()
+        {
+            Console.Write("\nPlease enter student City, to search: ");
+            foreach (var student in _manager.GetStundentsByCity(Console.ReadLine()))
+            {
+                Console.WriteLine(student);
+            }
+            Console.ReadLine();
+        }// End SearchByCity()
 
         public static string ReadStringInput()
         {
