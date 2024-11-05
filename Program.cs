@@ -4,7 +4,12 @@
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            StudentContext studentRegistry = new StudentContext();
+
+            Repository studentRepo = new Repository(studentRegistry);
+
+            Manager manager = new Manager(studentRepo);
+            manager.RunApp();
         }
     }
 }

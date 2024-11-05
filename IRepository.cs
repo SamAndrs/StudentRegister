@@ -14,7 +14,7 @@ namespace StudentRegister
 
         public bool CreateNew(List<string> objData);
 
-        public bool Update(int sID);
+        public bool Update(Object obj);
 
         public bool Remove(int sID);
 
