@@ -18,7 +18,7 @@ namespace StudentRegister
         {
             optionsBuilder.UseSqlServer(_connectionString);
         }
-
+        /*
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Student>().HasData(
@@ -28,7 +28,7 @@ namespace StudentRegister
                 new Student("Sven", "Tumba", "Stockholm"),
                 new Student("Robert", "Johansson", "Karlstad")
             );
-        }
+        }*/
 
 
     }

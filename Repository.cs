@@ -47,7 +47,7 @@ namespace StudentRegister
 
         public bool CreateNew(List<string> newData)  //-->(string fName, string lName, string cName)
         {
-            Student newStudent = new Student(newData[0], newData[1], newData[2]);
+            Student newStudent = new Student() { FirstName = newData[0], LastName = newData[1], City = newData[2] };
             try
             {
                 _context.Students.Add(newStudent);

@@ -16,6 +16,7 @@ namespace StudentRegister
 
         public string City { get; set; }
 
+        /*
         public Student(string fName, string lName, string cName)
         {
             FirstName = fName;
@@ -23,7 +24,7 @@ namespace StudentRegister
             LastName = lName;
 
             City = cName;
-        }
+        }*/
 
         public override string ToString()
         {
