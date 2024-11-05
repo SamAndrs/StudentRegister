@@ -18,7 +18,6 @@ namespace StudentRegister
         bool active = true;
         public void PrintMenu()
         {
-
             while (active)
             {
                 PrintMainMenu();
