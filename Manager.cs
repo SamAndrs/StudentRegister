@@ -59,27 +59,52 @@ namespace StudentRegister
             return _studentRepo.FindByCity(searchName);
         } // End GetStundentsByFirstName()
 
-        public void RegisterNewStudent(List<string> data)
+        public bool RegisterNewStudent(List<string> data)
         {
-            _studentRepo.CreateNew(data);
+            if(_studentRepo.CreateNew(data))
+            {
+                return true;
+            }
+            return false;
         }// End RegisterNewStudent()
 
-        public void ChangeStudentFirstName(Student thisStudent, string updateData)
+        public bool ChangeStudentFirstName(Student thisStudent, string updateData)
         {
             thisStudent.FirstName = updateData;
-            _studentRepo.Update(thisStudent);
+            if(_studentRepo.Update(thisStudent))
+            {
+                return true;
+            }
+            else
+            { 
+                return false;
+            }
         }// End ChangeStudentFirstName()
 
-        public void ChangeStudentLastName(Student thisStudent, string updateData)
+        public bool ChangeStudentLastName(Student thisStudent, string updateData)
         {
             thisStudent.LastName = updateData;
-            _studentRepo.Update(thisStudent);
+            if (_studentRepo.Update(thisStudent))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }// End ChangeStudentLastName()
 
-        public void ChangeStudentCity(Student thisStudent, string updateData)
+        public bool ChangeStudentCity(Student thisStudent, string updateData)
         {
             thisStudent.City = updateData;
-            _studentRepo.Update(thisStudent);
+            if (_studentRepo.Update(thisStudent))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }// End ChangeStudentCity()
 
     }

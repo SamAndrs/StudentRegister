@@ -19,18 +19,27 @@ namespace StudentRegister
             optionsBuilder.UseSqlServer(_connectionString);
         }
         /*
+        public void SeedDatabase()
+        {
+            Students.AddRange(new List<Student>
+            {
+                new Student() { StudentId= 1, FirstName="Samuel", LastName="Andersson", City="Örebro" },
+                new Student() { StudentId = 2, FirstName ="Fredrik", LastName="Milton", City="Örebro" },
+                new Student() { StudentId = 3, FirstName ="Sven", LastName="Tumba", City="Stockholm" },
+                new Student() { StudentId = 4, FirstName = "Robert", LastName="Johansson", City="Karlstad" }
+            });
+        }
+       
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Student>().HasData(
 
-               new Student("Samuel", "Andersson", "Örebro"),
-                new Student("Fredrik", "Milton", "Örebro"),
-                new Student("Sven", "Tumba", "Stockholm"),
-                new Student("Robert", "Johansson", "Karlstad")
+               new Student() { StudentId= 1, FirstName="Samuel", LastName="Andersson", City="Örebro" },
+                new Student() { StudentId = 2, FirstName ="Fredrik", LastName="Milton", City="Örebro" },
+                new Student() { StudentId = 3, FirstName ="Sven", LastName="Tumba", City="Stockholm" },
+                new Student() { StudentId = 4, FirstName = "Robert", LastName="Johansson", City="Karlstad" }
             );
         }*/
-
-
     }
 }
 

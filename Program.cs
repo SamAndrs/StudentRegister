@@ -1,4 +1,6 @@
-﻿namespace StudentRegister
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace StudentRegister
 {
     internal class Program
     {

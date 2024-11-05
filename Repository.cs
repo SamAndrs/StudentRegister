@@ -11,8 +11,6 @@ namespace StudentRegister
         private StudentContext _context;
 
         public List<Student>? StudentList { get; set; }
-        
-
 
         public Repository(StudentContext dbContext)
         {
@@ -69,7 +67,6 @@ namespace StudentRegister
                 _context.SaveChanges();
                 return true;
             }
-            Console.WriteLine("## ERROR ##: Could not update post. Not a valid ID!");
             return false;
         }// End Update()
 
@@ -83,10 +80,8 @@ namespace StudentRegister
             {
                     _context.Students.Remove(studentToDelete);
                     _context.SaveChanges();
-                    return true;
-                
+                    return true;   
             }
-            Console.WriteLine("## ERROR ##: Unable to delete post. Not a valid ID!");
             return false;
 
         }// End Remove()

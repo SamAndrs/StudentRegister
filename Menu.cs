@@ -163,11 +163,11 @@ namespace StudentRegister
 
         private void PrintCreateNewMenu()
         {
-            bool twoActive = true;
+            bool active = true;
 
             List<string> newData = new List<string>();
 
-            while (twoActive)
+            while (active)
             {
                 Console.Clear();
                 Console.WriteLine("---- Register New Student ----\n");
@@ -178,11 +178,17 @@ namespace StudentRegister
                 Console.Write("\nAdd Student City: ");
                 newData.Add(Console.ReadLine()); // ReadStringInput();
 
-                _manager.RegisterNewStudent(newData);
+                if(_manager.RegisterNewStudent(newData))
+                {
+                    Console.WriteLine($"\nNew Student: {newData[0]} registered.");
+                    Console.ReadLine();
+                }
+                else
+                {
+                    Console.WriteLine("## ERROR ##: Could not create new post");
+                }
+                active = false;
 
-                Console.WriteLine($"\nNew Student: {newData[0]} registered.");
-                Console.ReadLine();
-                twoActive = false;
             }
         }// End PrintCreateNewMenu()
 
@@ -199,18 +205,39 @@ namespace StudentRegister
                 {
                     case "1":
                         Console.Write("\nEnter new student First Name: ");
-                        _manager.ChangeStudentFirstName(toUpdate, Console.ReadLine());
-                        Console.WriteLine($"Name of Student {toUpdate.StudentId} changed to: {toUpdate.FirstName} {toUpdate.LastName}");
+                        if(_manager.ChangeStudentFirstName(toUpdate, Console.ReadLine()))
+                        {
+                            Console.WriteLine($"Name of Student {toUpdate.StudentId} changed to: {toUpdate.FirstName} {toUpdate.LastName}");
+                        }
+                        else
+                        {
+                            Console.WriteLine("## ERROR ##: Unable to update post!");
+                        }
+                        
                         break;
                     case "2":
                         Console.Write("\nEnter new student Last Name: ");
-                        _manager.ChangeStudentLastName(toUpdate, Console.ReadLine());
-                        Console.WriteLine($"Last Name of Student {toUpdate.StudentId}: {toUpdate.FirstName} changed to {toUpdate.LastName}");
+                        if(_manager.ChangeStudentLastName(toUpdate, Console.ReadLine()))
+                        {
+                            Console.WriteLine($"Last Name of Student {toUpdate.StudentId}: {toUpdate.FirstName} changed to {toUpdate.LastName}");
+                        }
+                        else
+                        {
+                            Console.WriteLine("## ERROR ##: Unable to update post!");
+                        }
+                        
                         break;
                     case "3":
                         Console.Write("\nEnter new student City: ");
-                        _manager.ChangeStudentCity(toUpdate, Console.ReadLine());
-                        Console.WriteLine($"City of Student {toUpdate.StudentId}: {toUpdate.FirstName} {toUpdate.LastName} changed to: {toUpdate.City}");
+                        if(_manager.ChangeStudentCity(toUpdate, Console.ReadLine()))
+                        {
+                            Console.WriteLine($"City of Student {toUpdate.StudentId}: {toUpdate.FirstName} {toUpdate.LastName} changed to: {toUpdate.City}");
+                        }
+                        else
+                        {
+                            Console.WriteLine("## ERROR ##: Unable to update post!");
+                        }
+                        
                         break;
                     case "Q":
                         Console.WriteLine("Aborting.");
