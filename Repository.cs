@@ -54,7 +54,6 @@ namespace StudentRegister
             }
             catch
             {
-                Console.WriteLine("## ERROR ##: Unable to add new post!");
                 return false;
             }
         }// End CreateNew()

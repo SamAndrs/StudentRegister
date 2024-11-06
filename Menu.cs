@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace StudentRegister
 {
@@ -62,17 +63,10 @@ namespace StudentRegister
                         PrintCreateNewMenu();
                         break;
                     case "3": // Edit Student Data
-                        Console.Clear();
-                        Console.WriteLine("---- Change Student Information ----\n");
-                        Console.Write("\n Enter Student ID: ");
-                        if (Int32.TryParse(Console.ReadLine(), out int sID))
-                        {
-                            PrintEditMenu(sID);
-                        }
-                        else
-                        {
-                            Console.WriteLine("## ERROR ##: Please enter a valid Student ID!");
-                        }
+                        PrintEditMenu();
+                        break;
+                    case "4":
+                        PrintRemoveMenu();
                         break;
                     case "Q": // Quit Application
                         Console.WriteLine("Closing Program");
@@ -109,7 +103,8 @@ namespace StudentRegister
             Console.WriteLine($"---- Menu ---- ");
             Console.WriteLine("1. List All Students");
             Console.WriteLine("2. Add New Student");
-            Console.WriteLine("3. Edit Student Data\n");
+            Console.WriteLine("3. Edit Student Data");
+            Console.WriteLine("4. Remove Student from Registry\n");
             Console.WriteLine("Q. Quit Application shop\n");
 
             Console.Write("-> ");
@@ -192,52 +187,44 @@ namespace StudentRegister
             }
         }// End PrintCreateNewMenu()
 
-        private void PrintEditMenu(int readID)
+        private void PrintEditMenu()
         {
-            Student toUpdate = _manager.GetStudentByID(readID);
-            Console.WriteLine("This Student: " + toUpdate);
+            Console.Clear();
+            Console.WriteLine("---- Change Student Information ----\n");
+            Console.Write("\n Enter Student ID: ");
+            if (Int32.TryParse(Console.ReadLine(), out int sID))
+            {
+                Student toUpdate = _manager.GetStudentByID(sID);
+                Console.WriteLine("This Student: " + toUpdate);
+                PrintEditOptions(toUpdate);
+            }
+            else
+            {
+                Console.WriteLine("## ERROR ##: Please enter a valid Student ID!");
+            }
+        }// End PrintEditMenu()
+
+        private void PrintEditOptions(Student thisStudent)
+        {             
             bool editData = true;
             while (editData)
             {
-                PrintEditInfoMenu();
+                Console.WriteLine("Change what information?\n");
+                Console.WriteLine("1. Change Student First Name");
+                Console.WriteLine("2. Change Student Last Name");
+                Console.WriteLine("3. Change Student City");
+                Console.WriteLine("Q. Abort.");
 
                 switch (ReadStringInput().ToUpper())
                 {
                     case "1":
-                        Console.Write("\nEnter new student First Name: ");
-                        if(_manager.ChangeStudentFirstName(toUpdate, Console.ReadLine()))
-                        {
-                            Console.WriteLine($"Name of Student {toUpdate.StudentId} changed to: {toUpdate.FirstName} {toUpdate.LastName}");
-                        }
-                        else
-                        {
-                            Console.WriteLine("## ERROR ##: Unable to update post!");
-                        }
-                        
+                        EnterFirstName(thisStudent); 
                         break;
                     case "2":
-                        Console.Write("\nEnter new student Last Name: ");
-                        if(_manager.ChangeStudentLastName(toUpdate, Console.ReadLine()))
-                        {
-                            Console.WriteLine($"Last Name of Student {toUpdate.StudentId}: {toUpdate.FirstName} changed to {toUpdate.LastName}");
-                        }
-                        else
-                        {
-                            Console.WriteLine("## ERROR ##: Unable to update post!");
-                        }
-                        
+                        EnterLastName(thisStudent);
                         break;
                     case "3":
-                        Console.Write("\nEnter new student City: ");
-                        if(_manager.ChangeStudentCity(toUpdate, Console.ReadLine()))
-                        {
-                            Console.WriteLine($"City of Student {toUpdate.StudentId}: {toUpdate.FirstName} {toUpdate.LastName} changed to: {toUpdate.City}");
-                        }
-                        else
-                        {
-                            Console.WriteLine("## ERROR ##: Unable to update post!");
-                        }
-                        
+                        EnterCityName(thisStudent);
                         break;
                     case "Q":
                         Console.WriteLine("Aborting.");
@@ -251,14 +238,61 @@ namespace StudentRegister
             }
         }// End PrintEditMenu()
 
-        private void PrintEditInfoMenu()
+        private void EnterFirstName(Student thisStudent)
         {
-            Console.WriteLine("Change what information?\n");
-            Console.WriteLine("1. Change Student First Name");
-            Console.WriteLine("2. Change Student Last Name");
-            Console.WriteLine("3. Change Student City");
-            Console.WriteLine("Q. Abort.");
-        }// End PrintEditInfoMenu()
+            Console.Write("\nEnter new student First Name: ");
+            if (_manager.ChangeStudentFirstName(thisStudent, Console.ReadLine()))
+            {
+                Console.WriteLine($"Name of Student {thisStudent.StudentId} changed to: {thisStudent.FirstName} {thisStudent.LastName}");
+            }
+            else
+            {
+                Console.WriteLine("## ERROR ##: Unable to update post!");
+            }
+        }// End EnterFirstName()
+
+        private void EnterLastName(Student thisStudent)
+        {
+            Console.Write("\nEnter new student Last Name: ");
+            if (_manager.ChangeStudentLastName(thisStudent, Console.ReadLine()))
+            {
+                Console.WriteLine($"Name of Student {thisStudent.StudentId} changed to: {thisStudent.FirstName} {thisStudent.LastName}");
+            }
+            else
+            {
+                Console.WriteLine("## ERROR ##: Unable to update post!");
+            }
+        }// End EnterLastName()
+
+        private void EnterCityName(Student thisStudent)
+        {
+            Console.Write("\nEnter new student City: ");
+            if (_manager.ChangeStudentCity(thisStudent, Console.ReadLine()))
+            {
+                Console.WriteLine($"City of Student {thisStudent.StudentId} changed to: {thisStudent.City}");
+            }
+            else
+            {
+                Console.WriteLine("## ERROR ##: Unable to update post!");
+            }
+        }// End EnterCityName()
+
+        private void PrintRemoveMenu()
+        {
+            Console.Clear();
+            Console.Write("\nPlease enter ID of student to remove: ");
+            Int32.TryParse(Console.ReadLine(), out int id);
+
+            if (_manager.GetStudentByID(id) != null)
+            {
+                Console.WriteLine(_manager.RemoveStudentByID(id));
+            }
+            else
+            {
+                Console.WriteLine("## ERROR ## Invalid ID, or student doesn't exist!");
+            }
+            Console.ReadLine();
+        }
 
         public static string ReadStringInput()
         {
