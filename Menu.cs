@@ -23,16 +23,16 @@ namespace StudentRegister
             while (active)
             {
                 PrintMainMenu();
-                //switch(ReadStringInput().ToUpper())
-                switch (Console.ReadLine().ToUpper())
+                switch(ReadStringInput("->").ToUpper())
+                //switch (Console.ReadLine().ToUpper())
                 {
                     case "1": // List All Students
                         bool oneActive = true;
                         while (oneActive)
                         {
                             ListAllMenu();
-                            //switch(ReadStringInput().ToUpper())
-                            switch (Console.ReadLine().ToUpper())
+                            switch(ReadStringInput("->").ToUpper())
+                            //switch (Console.ReadLine().ToUpper())
                             {
                                 case "1": // Search by ID
                                     SearchByID();
@@ -81,6 +81,17 @@ namespace StudentRegister
             }
         }// End PrintMenu()
 
+        private void PrintMainMenu()
+        {
+            Console.Clear();
+            Console.WriteLine($"---- Menu ---- ");
+            Console.WriteLine("1. List All Students");
+            Console.WriteLine("2. Add New Student");
+            Console.WriteLine("3. Edit Student Data");
+            Console.WriteLine("4. Remove Student from Registry\n");
+            Console.WriteLine("Q. Quit Application shop\n");
+        }// End PrintMainMenu()
+
         private void ListAllMenu()
         {
             Console.Clear();
@@ -93,27 +104,11 @@ namespace StudentRegister
             Console.WriteLine("3. List Students With Last Name");
             Console.WriteLine("4. List Students From City\n");
             Console.WriteLine("Q. Return to Main Menu\n");
-
-            Console.Write("-> ");
         }// End ListAllMenu()
-
-        private void PrintMainMenu()
-        {
-            Console.Clear();
-            Console.WriteLine($"---- Menu ---- ");
-            Console.WriteLine("1. List All Students");
-            Console.WriteLine("2. Add New Student");
-            Console.WriteLine("3. Edit Student Data");
-            Console.WriteLine("4. Remove Student from Registry\n");
-            Console.WriteLine("Q. Quit Application shop\n");
-
-            Console.Write("-> ");
-        }// End PrintMainMenu(9
 
         private void SearchByID()
         {
-            Console.Write("\nPlease enter student ID: ");
-            Int32.TryParse(Console.ReadLine(), out int id);
+            Int32.TryParse(ReadStringInput("Please enter student ID: "), out int id);
 
             if (_manager.GetStudentByID(id) != null)
             {
@@ -128,8 +123,7 @@ namespace StudentRegister
 
         private void SearchByFirstName()
         {
-            Console.Write("\nPlease enter student First Name, to search: ");
-            foreach (var student in _manager.GetStundentsByFirstName(Console.ReadLine()))
+            foreach (var student in _manager.GetStundentsByFirstName(ReadStringInput("Please enter student First Name, to search: ")))
             {
                 Console.WriteLine(student);
             }
@@ -138,8 +132,7 @@ namespace StudentRegister
 
         private void SearchByLastName()
         {
-            Console.Write("\nPlease enter student Last Name, to search: ");
-            foreach (var student in _manager.GetStundentsByLastName(Console.ReadLine()))
+            foreach (var student in _manager.GetStundentsByLastName(ReadStringInput("Please enter student Last Name, to search: ")))
             {
                 Console.WriteLine(student);
             }
@@ -148,8 +141,7 @@ namespace StudentRegister
 
         private void SearchByCity()
         {
-            Console.Write("\nPlease enter student City, to search: ");
-            foreach (var student in _manager.GetStundentsByCity(Console.ReadLine()))
+            foreach (var student in _manager.GetStundentsByCity(ReadStringInput("Please enter student City, to search: ")))
             {
                 Console.WriteLine(student);
             }
@@ -166,12 +158,9 @@ namespace StudentRegister
             {
                 Console.Clear();
                 Console.WriteLine("---- Register New Student ----\n");
-                Console.Write("\nAdd Student First Name: ");
-                newData.Add(Console.ReadLine()); // ReadStringInput();
-                Console.Write("\nAdd Student Last Name: ");
-                newData.Add(Console.ReadLine()); //ReadStringInput();
-                Console.Write("\nAdd Student City: ");
-                newData.Add(Console.ReadLine()); // ReadStringInput();
+                newData.Add(ReadStringInput("Add Student First Name: "));
+                newData.Add(ReadStringInput("Add Student Last Name: "));
+                newData.Add(ReadStringInput("Add Student City: "));
 
                 if(_manager.RegisterNewStudent(newData))
                 {
@@ -191,8 +180,7 @@ namespace StudentRegister
         {
             Console.Clear();
             Console.WriteLine("---- Change Student Information ----\n");
-            Console.Write("\n Enter Student ID: ");
-            if (Int32.TryParse(Console.ReadLine(), out int sID))
+            if (Int32.TryParse(ReadStringInput("Enter Student ID: "), out int sID))
             {
                 Student toUpdate = _manager.GetStudentByID(sID);
                 Console.WriteLine("This Student: " + toUpdate);
@@ -212,10 +200,10 @@ namespace StudentRegister
                 Console.WriteLine("Change what information?\n");
                 Console.WriteLine("1. Change Student First Name");
                 Console.WriteLine("2. Change Student Last Name");
-                Console.WriteLine("3. Change Student City");
+                Console.WriteLine("3. Change Student City\n");
                 Console.WriteLine("Q. Abort.");
 
-                switch (ReadStringInput().ToUpper())
+                switch (ReadStringInput("->").ToUpper())
                 {
                     case "1":
                         EnterFirstName(thisStudent); 
@@ -240,8 +228,7 @@ namespace StudentRegister
 
         private void EnterFirstName(Student thisStudent)
         {
-            Console.Write("\nEnter new student First Name: ");
-            if (_manager.ChangeStudentFirstName(thisStudent, Console.ReadLine()))
+            if (_manager.ChangeStudentFirstName(thisStudent, ReadStringInput("Enter new student First Name: ")))
             {
                 Console.WriteLine($"Name of Student {thisStudent.StudentId} changed to: {thisStudent.FirstName} {thisStudent.LastName}");
             }
@@ -253,8 +240,7 @@ namespace StudentRegister
 
         private void EnterLastName(Student thisStudent)
         {
-            Console.Write("\nEnter new student Last Name: ");
-            if (_manager.ChangeStudentLastName(thisStudent, Console.ReadLine()))
+            if (_manager.ChangeStudentLastName(thisStudent, ReadStringInput("Enter new student Last Name: ")))
             {
                 Console.WriteLine($"Name of Student {thisStudent.StudentId} changed to: {thisStudent.FirstName} {thisStudent.LastName}");
             }
@@ -266,8 +252,7 @@ namespace StudentRegister
 
         private void EnterCityName(Student thisStudent)
         {
-            Console.Write("\nEnter new student City: ");
-            if (_manager.ChangeStudentCity(thisStudent, Console.ReadLine()))
+            if (_manager.ChangeStudentCity(thisStudent, ReadStringInput("Enter new student City: ")))
             {
                 Console.WriteLine($"City of Student {thisStudent.StudentId} changed to: {thisStudent.City}");
             }
@@ -280,8 +265,7 @@ namespace StudentRegister
         private void PrintRemoveMenu()
         {
             Console.Clear();
-            Console.Write("\nPlease enter ID of student to remove: ");
-            Int32.TryParse(Console.ReadLine(), out int id);
+            Int32.TryParse(ReadStringInput("Please enter ID of student to remove: "), out int id);
 
             if (_manager.GetStudentByID(id) != null)
             {
@@ -294,22 +278,16 @@ namespace StudentRegister
             Console.ReadLine();
         }
 
-        public static string ReadStringInput()
+        public string ReadStringInput(string prompt)
         {
-            string text = "";
-
-            if (Console.ReadLine() != null)
+            string text= Console.ReadLine();
+            Console.Write("\n" + prompt);
+            if (Console.ReadLine() != null || Console.ReadLine().Length > 0)
             {
-                text = Console.ReadLine();
                 return text;
             }
+            Console.WriteLine("Invalid input. Please try again!");
             return text;
-            /*
-            else
-            {
-                Console.WriteLine("Invalid input");
-            }
-            return text;*/
         }// End ReadStringInput()
     }
 }
