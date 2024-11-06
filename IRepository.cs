@@ -12,7 +12,8 @@ namespace StudentRegister
 
         public Object FindByID(int sID);
 
-        public bool CreateNew(List<string> objData);
+        //public bool CreateNew(List<string> objData);
+        public bool CreateNew(Object obj);
 
         public bool Update(Object obj);
 

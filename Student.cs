@@ -16,19 +16,9 @@ namespace StudentRegister
 
         public string? City { get; set; }
 
-        /*
-        public Student(string fName, string lName, string cName)
-        {
-            FirstName = fName;
-
-            LastName = lName;
-
-            City = cName;
-        }*/
-
         public override string ToString()
         {
-            return string.Format("{0, -8}{1,-15}{2,-25}{3,-10}","{StudentId} {FirstName} {LastName} {City}");
+            return string.Format("{0, -8}{1,-15}{2,-25}{3,-10}",StudentId, FirstName, LastName, City);
         }
     }
 }

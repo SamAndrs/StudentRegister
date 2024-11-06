@@ -43,12 +43,13 @@ namespace StudentRegister
             return _context.Students.Where(s => s.City == city).OrderByDescending(n => n.LastName).ToList();
         }// End FindByCity()
 
-        public bool CreateNew(List<string> newData)  //-->(string fName, string lName, string cName)
+        //public bool CreateNew(List<string> newData)  //-->(string fName, string lName, string cName)
+        public bool CreateNew(Object student)
         {
-            Student newStudent = new Student() { FirstName = newData[0], LastName = newData[1], City = newData[2] };
+            //Student newStudent = new Student() { FirstName = newData[0], LastName = newData[1], City = newData[2] };
             try
             {
-                _context.Students.Add(newStudent);
+                _context.Students.Add((Student)student);
                 _context.SaveChanges();
                 return true;
             }

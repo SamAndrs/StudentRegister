@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
@@ -24,40 +23,9 @@ namespace StudentRegister
             {
                 PrintMainMenu();
                 switch(ReadStringInput("->").ToUpper())
-                //switch (Console.ReadLine().ToUpper())
                 {
                     case "1": // List All Students
-                        bool oneActive = true;
-                        while (oneActive)
-                        {
-                            ListAllMenu();
-                            switch(ReadStringInput("->").ToUpper())
-                            //switch (Console.ReadLine().ToUpper())
-                            {
-                                case "1": // Search by ID
-                                    SearchByID();
-                                    break;
-
-                                case "2": // Search by First Name
-                                    SearchByFirstName();
-                                    break;
-
-                                case "3": // Search by Last Name
-                                    SearchByLastName();
-                                    break;
-
-                                case "4": //Search by City Name
-                                    SearchByCity();
-                                    break;
-
-                                case "Q":
-                                    oneActive = false;
-                                    break;
-                                default:
-                                    Console.WriteLine("## ERROR ##: Please enter a valid menu option!");
-                                    break;
-                            }
-                        }
+                        ListAllStudents();
                         break;
                     case "2": // Add New Student
                         PrintCreateNewMenu();
@@ -92,6 +60,39 @@ namespace StudentRegister
             Console.WriteLine("Q. Quit Application shop\n");
         }// End PrintMainMenu()
 
+        private void ListAllStudents()
+        {
+            while (true)
+            {
+                ListAllMenu();
+                switch (ReadStringInput("->").ToUpper())
+                {
+                    case "1": // Search by ID
+                        SearchByID();
+                        break;
+
+                    case "2": // Search by First Name
+                        SearchByFirstName();
+                        break;
+
+                    case "3": // Search by Last Name
+                        SearchByLastName();
+                        break;
+
+                    case "4": //Search by City Name
+                        SearchByCity();
+                        break;
+
+                    case "Q":
+                        return;
+                        break;
+                    default:
+                        Console.WriteLine("## ERROR ##: Please enter a valid menu option!");
+                        break;
+                }
+            }
+        }// End 
+
         private void ListAllMenu()
         {
             Console.Clear();
@@ -123,29 +124,50 @@ namespace StudentRegister
 
         private void SearchByFirstName()
         {
-            foreach (var student in _manager.GetStundentsByFirstName(ReadStringInput("Please enter student First Name, to search: ")))
+            var students = _manager.GetStundentsByFirstName(ReadStringInput("Please enter student First Name, to search: "));
+            if (students != null)
             {
-                Console.WriteLine(student);
+                foreach(var student in students)
+                {
+                    Console.WriteLine(student);
+                }
+                Console.ReadKey();
+                return;
             }
-            Console.ReadLine();
+            Console.WriteLine("## ERROR ## Invalid ID, or student doesn't exist!");
+            Console.ReadKey();
         }// End SearchByFirstName()
 
         private void SearchByLastName()
         {
-            foreach (var student in _manager.GetStundentsByLastName(ReadStringInput("Please enter student Last Name, to search: ")))
+            var students = _manager.GetStundentsByLastName(ReadStringInput("Please enter student Last Name, to search: "));
+            if (students != null)
             {
-                Console.WriteLine(student);
+                foreach (var student in students)
+                {
+                    Console.WriteLine(student);
+                }
+                Console.ReadKey();
+                return;
             }
-            Console.ReadLine();
+            Console.WriteLine("## ERROR ## Invalid ID, or student doesn't exist!");
+            Console.ReadKey();
         }// End SearchByLastName()
 
         private void SearchByCity()
         {
-            foreach (var student in _manager.GetStundentsByCity(ReadStringInput("Please enter student City, to search: ")))
+            var students = _manager.GetStundentsByCity(ReadStringInput("Please enter student City, to search: "));
+            if (students != null)
             {
-                Console.WriteLine(student);
+                foreach (var student in students)
+                {
+                    Console.WriteLine(student);
+                }
+                Console.ReadKey();
+                return;
             }
-            Console.ReadLine();
+            Console.WriteLine("## ERROR ## Invalid ID, or student doesn't exist!");
+            Console.ReadKey();
         }// End SearchByCity()
 
         private void PrintCreateNewMenu()
@@ -158,21 +180,21 @@ namespace StudentRegister
             {
                 Console.Clear();
                 Console.WriteLine("---- Register New Student ----\n");
-                newData.Add(ReadStringInput("Add Student First Name: "));
-                newData.Add(ReadStringInput("Add Student Last Name: "));
-                newData.Add(ReadStringInput("Add Student City: "));
+                Console.WriteLine("Add student data: ");
+                string fName = ReadStringInput("Add Student First Name: ");
+                string lName = ReadStringInput("Add Student Last Name: ");
+                string city = ReadStringInput("Add Student City Name: ");
 
-                if(_manager.RegisterNewStudent(newData))
+                if(_manager.RegisterNewStudent(fName, lName, city))
                 {
-                    Console.WriteLine($"\nNew Student: {newData[0]} registered.");
-                    Console.ReadLine();
+                    Console.WriteLine($"\nNew Student: {fName} registered.");
                 }
                 else
                 {
                     Console.WriteLine("## ERROR ##: Could not create new post");
                 }
+                Console.ReadLine();
                 active = false;
-
             }
         }// End PrintCreateNewMenu()
 
@@ -276,18 +298,25 @@ namespace StudentRegister
                 Console.WriteLine("## ERROR ## Invalid ID, or student doesn't exist!");
             }
             Console.ReadLine();
-        }
+        }// End PrintRemoveMenu()
 
         public string ReadStringInput(string prompt)
         {
-            string text= Console.ReadLine();
-            Console.Write("\n" + prompt);
-            if (Console.ReadLine() != null || Console.ReadLine().Length > 0)
+            //string text= Console.ReadLine();
+
+            string value;
+            while (true)
             {
-                return text;
+                //Console.Write($"{inputText}: ");
+                Console.Write(prompt + "->");
+                value = Console.ReadLine();
+                if (string.IsNullOrEmpty(value))
+                {
+                    Console.WriteLine("Invalid input, try again.");
+                    continue;
+                }
+                return value;
             }
-            Console.WriteLine("Invalid input. Please try again!");
-            return text;
         }// End ReadStringInput()
     }
 }

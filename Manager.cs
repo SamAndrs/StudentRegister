@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel.Design;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -35,7 +36,7 @@ namespace StudentRegister
         {
             foreach (var student in FetchStudentList())
             {
-                Console.WriteLine(student.ToString());
+                Console.WriteLine(student);
             }
         }// PrintStudentList()
 
@@ -60,9 +61,12 @@ namespace StudentRegister
             return _studentRepo.FindByCity(searchName);
         } // End GetStundentsByFirstName()
 
-        public bool RegisterNewStudent(List<string> data)
+        //public bool RegisterNewStudent(List<string> data)
+        public bool RegisterNewStudent(string fName, string lName, string city)
         {
-            if(_studentRepo.CreateNew(data))
+            //if(_studentRepo.CreateNew(data))
+            var student = new Student() { FirstName=fName, LastName=lName, City=city};
+            if(_studentRepo.CreateNew(student))
             {
                 return true;
             }
