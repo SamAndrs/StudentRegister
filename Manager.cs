@@ -43,7 +43,6 @@ namespace StudentRegister
         public Student GetStudentByID(int sID)
         {
             return (Student)_studentRepo.FindByID(sID);
-            //return _studentRepo.StudentList.ElementAt(sID);
         }// End GetStudentByID
 
         public List<Student> GetStundentsByFirstName(string searchName)
@@ -61,10 +60,8 @@ namespace StudentRegister
             return _studentRepo.FindByCity(searchName);
         } // End GetStundentsByFirstName()
 
-        //public bool RegisterNewStudent(List<string> data)
         public bool RegisterNewStudent(string fName, string lName, string city)
         {
-            //if(_studentRepo.CreateNew(data))
             var student = new Student() { FirstName=fName, LastName=lName, City=city};
             if(_studentRepo.CreateNew(student))
             {

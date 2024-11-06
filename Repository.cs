@@ -43,10 +43,8 @@ namespace StudentRegister
             return _context.Students.Where(s => s.City == city).OrderByDescending(n => n.LastName).ToList();
         }// End FindByCity()
 
-        //public bool CreateNew(List<string> newData)  //-->(string fName, string lName, string cName)
         public bool CreateNew(Object student)
         {
-            //Student newStudent = new Student() { FirstName = newData[0], LastName = newData[1], City = newData[2] };
             try
             {
                 _context.Students.Add((Student)student);
@@ -71,9 +69,7 @@ namespace StudentRegister
         }// End Update()
 
         public bool Remove(int sID)
-        {
-            // int toDelete = (int)_context.Students.SelectedItem(sID);
-            
+        {           
             var studentToDelete = _context.Students.First(s => s.StudentId == sID);
 
             if(studentToDelete != null)
@@ -83,7 +79,6 @@ namespace StudentRegister
                     return true;   
             }
             return false;
-
         }// End Remove()
     }
 }
