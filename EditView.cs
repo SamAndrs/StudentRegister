@@ -26,13 +26,21 @@ namespace StudentRegister
             if (Int32.TryParse(_menu.ReadStringInput("Enter Student ID: "), out int sID))
             {
                 Student toUpdate = _manager.GetStudentByID(sID);
-                Console.WriteLine("This Student: " + toUpdate);
-                PrintEditOptions(toUpdate);
+                if (toUpdate != null)
+                {
+                    Console.WriteLine("This Student: " + toUpdate);
+                    PrintEditOptions(toUpdate);
+                }
+                else
+                {
+                    Console.WriteLine("## ERROR ##: Student with that ID does not exist!");
+                }
             }
             else
             {
                 Console.WriteLine("## ERROR ##: Please enter a valid Student ID!");
             }
+            Console.ReadKey();
         }// End PrintEditView()
 
         private void PrintEditOptions(Student thisStudent)

@@ -96,6 +96,8 @@ namespace StudentRegister
                         break;
 
                     case "Q":
+                        Console.WriteLine("Aborting");
+                        Console.ReadLine();
                         return;
                         //break;
                     default:

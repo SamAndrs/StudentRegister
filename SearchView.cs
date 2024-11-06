@@ -29,13 +29,13 @@ namespace StudentRegister
             {
                 Console.WriteLine("## ERROR ## Invalid ID, or student doesn't exist!");
             }
-            Console.ReadLine();
+            Console.ReadKey();
         }// End SearchByID()
 
         public void SearchByFirstName()
         {
             var students = _manager.GetStundentsByFirstName(_menu.ReadStringInput("Please enter student First Name, to search: "));
-            if (students != null)
+            if (students.Count > 0)
             {
                 foreach (var student in students)
                 {
@@ -44,14 +44,14 @@ namespace StudentRegister
                 Console.ReadKey();
                 return;
             }
-            Console.WriteLine("## ERROR ## Invalid ID, or student doesn't exist!");
+            Console.WriteLine("## ERROR ## Invalid ID, or student(s) doesn't exist!");
             Console.ReadKey();
         }// End SearchByFirstName()
 
         public void SearchByLastName()
         {
             var students = _manager.GetStundentsByLastName(_menu.ReadStringInput("Please enter student Last Name, to search: "));
-            if (students != null)
+            if (students.Count >0)
             {
                 foreach (var student in students)
                 {
@@ -60,14 +60,14 @@ namespace StudentRegister
                 Console.ReadKey();
                 return;
             }
-            Console.WriteLine("## ERROR ## Invalid ID, or student doesn't exist!");
+            Console.WriteLine("## ERROR ## Invalid ID, or student(s) doesn't exist!");
             Console.ReadKey();
         }// End SearchByLastName()
 
         public void SearchByCity()
         {
             var students = _manager.GetStundentsByCity(_menu.ReadStringInput("Please enter student City, to search: "));
-            if (students != null)
+            if (students.Count>0)// != null)
             {
                 foreach (var student in students)
                 {
@@ -76,7 +76,7 @@ namespace StudentRegister
                 Console.ReadKey();
                 return;
             }
-            Console.WriteLine("## ERROR ## Invalid ID, or student doesn't exist!");
+            Console.WriteLine("## ERROR ## Invalid ID, or student(s) doesn't exist!");
             Console.ReadKey();
         }// End SearchByCity()
     }
