@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using StudentRegister.RegistryClasses;
 
 namespace StudentRegister
 {

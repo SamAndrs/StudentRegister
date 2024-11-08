@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StudentRegister
+namespace StudentRegister.RegistryClasses
 {
     public class Repository : IRepository
     {
@@ -22,7 +22,7 @@ namespace StudentRegister
             StudentList = _context.Students.Select(s => s).OrderByDescending(s => s.LastName).ToList();
         }// End SelectAll()
 
-        public Object FindByID(int sID)
+        public object FindByID(int sID)
         {
             var findStudent = _context.Students.Where(s => s.StudentId == sID).FirstOrDefault();
             return findStudent;
@@ -30,7 +30,7 @@ namespace StudentRegister
 
         public List<Student> FindByFirstName(string name)
         {
-            return _context.Students.Where(s=> s.FirstName == name).OrderByDescending(n=> n.LastName).ToList();
+            return _context.Students.Where(s => s.FirstName == name).OrderByDescending(n => n.LastName).ToList();
         }// END FindByFirstName()
 
         public List<Student> FindByLastName(string name)
@@ -43,7 +43,7 @@ namespace StudentRegister
             return _context.Students.Where(s => s.City == city).OrderByDescending(n => n.LastName).ToList();
         }// End FindByCity()
 
-        public bool CreateNew(Object student)
+        public bool CreateNew(object student)
         {
             try
             {
@@ -57,9 +57,9 @@ namespace StudentRegister
             }
         }// End CreateNew()
 
-        public bool Update(Object thisStudent)
+        public bool Update(object thisStudent)
         {
-            if((Student)thisStudent != null)
+            if ((Student)thisStudent != null)
             {
                 _context.Students.Update((Student)thisStudent);
                 _context.SaveChanges();
@@ -69,14 +69,14 @@ namespace StudentRegister
         }// End Update()
 
         public bool Remove(int sID)
-        {           
+        {
             var studentToDelete = _context.Students.First(s => s.StudentId == sID);
 
-            if(studentToDelete != null)
+            if (studentToDelete != null)
             {
-                    _context.Students.Remove(studentToDelete);
-                    _context.SaveChanges();
-                    return true;   
+                _context.Students.Remove(studentToDelete);
+                _context.SaveChanges();
+                return true;
             }
             return false;
         }// End Remove()
