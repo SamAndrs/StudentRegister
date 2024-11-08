@@ -6,20 +6,22 @@ using System.Threading.Tasks;
 
 namespace StudentRegister.RegistryClasses
 {
-    public class Repository : IRepository
+    public class StudentRepository : IRepository
     {
         private StudentContext _context;
 
         public List<Student>? StudentList { get; set; }
 
-        public Repository(StudentContext dbContext)
+        public List<StudentClass>? StudentClassList { get; set; }
+
+        public StudentRepository(StudentContext dbContext)
         {
             _context = dbContext;
         }
 
         public void SelectAll()
         {
-            StudentList = _context.Students.Select(s => s).OrderByDescending(s => s.LastName).ToList();
+           StudentList = _context.Students.Select(s => s).OrderByDescending(s => s.LastName).ToList();
         }// End SelectAll()
 
         public object FindByID(int sID)

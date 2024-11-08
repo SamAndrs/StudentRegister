@@ -14,11 +14,11 @@ namespace StudentRegister
     {
         private Menu _menu;
 
-        private Repository _studentRepo;
+        private StudentRepository _studentRepo;
 
-        public Manager(Repository studentRepo)
+        public Manager(StudentRepository studentRepo)
         {
-            _studentRepo = new Repository(new StudentContext());
+            _studentRepo = new StudentRepository(new StudentContext());
         }
 
         public void RunApp()
@@ -27,12 +27,13 @@ namespace StudentRegister
             _menu.PrintMenu();
         }
 
+        
         private List<Student> FetchStudentList()
         {
             _studentRepo.SelectAll();
             return _studentRepo.StudentList;
         }// End FetchStudentList()
-
+        
         public void PrintStudentList()
         {
             foreach (var student in FetchStudentList())
@@ -40,6 +41,7 @@ namespace StudentRegister
                 Console.WriteLine(student);
             }
         }// PrintStudentList()
+        
 
         public Student GetStudentByID(int sID)
         {

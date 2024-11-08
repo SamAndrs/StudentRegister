@@ -111,7 +111,7 @@ namespace StudentRegister
         private void ListAllMenu()
         {
             Console.Clear();
-            Console.WriteLine("{0, -8}{1,-15}{2,-25}{3,-10}", "ID", "First Name", "Last Name", "City");
+            Console.WriteLine("{0, -8}{1,-15}{2,-25}{3,-10}{3,-15}", "ID", "First Name", "Last Name", "City", "Student Class");
             Console.WriteLine(new string('=', 60) + "\n");
             // List All Students
             _manager.PrintStudentList();

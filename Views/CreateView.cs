@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using StudentRegister.RegistryClasses;
 
 namespace StudentRegister.Views
 {
@@ -27,9 +29,13 @@ namespace StudentRegister.Views
                 Console.Clear();
                 Console.WriteLine("---- Register New Student ----\n");
                 Console.WriteLine("Add student data: ");
-                string fName = _menu.ReadStringInput("Add Student First Name: ");
-                string lName = _menu.ReadStringInput("Add Student Last Name: ");
-                string city = _menu.ReadStringInput("Add Student City Name: ");
+                string fName = _menu.ReadStringInput("Enter Student First Name: ");
+                string lName = _menu.ReadStringInput("Enter Student Last Name: ");
+                string city = _menu.ReadStringInput("Enter Student City Name: ");
+
+                ListStudentClasses();
+
+                int sClass = Convert.ToInt32((_menu.ReadStringInput("Enter Student Class ID: ")));
 
                 if (_manager.RegisterNewStudent(fName, lName, city))
                 {
@@ -43,5 +49,13 @@ namespace StudentRegister.Views
                 active = false;
             }
         }// End PrintCreateNewMenu()
+
+        private void ListStudentClasses(List<StudentClass> studentClasses)
+        {
+            foreach(var sClass in studentClasses)
+            {
+                Console.WriteLine($"{sClass.StudentClassId} - {sClass.ClassName}");
+            }
+        }
     }
 }

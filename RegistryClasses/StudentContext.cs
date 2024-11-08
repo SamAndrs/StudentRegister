@@ -13,6 +13,8 @@ namespace StudentRegister.RegistryClasses
         private string _connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=\"new FC Core\";Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False";
 
         public DbSet<Student>? Students { get; set; }
+        
+        public DbSet<StudentClass> StudentClasses { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
