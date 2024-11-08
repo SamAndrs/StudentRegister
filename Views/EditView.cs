@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StudentRegister
+namespace StudentRegister.Views
 {
     public class EditView
     {
@@ -23,7 +23,7 @@ namespace StudentRegister
         {
             Console.Clear();
             Console.WriteLine("---- Change Student Information ----\n");
-            if (Int32.TryParse(_menu.ReadStringInput("Enter Student ID: "), out int sID))
+            if (int.TryParse(_menu.ReadStringInput("Enter Student ID: "), out int sID))
             {
                 Student toUpdate = _manager.GetStudentByID(sID);
                 if (toUpdate != null)

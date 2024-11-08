@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StudentRegister
+namespace StudentRegister.Views
 {
     public class CreateView
     {
@@ -14,9 +14,9 @@ namespace StudentRegister
 
         public CreateView(Manager setManager, Menu setMenu)
         {
-           _manager = setManager;
+            _manager = setManager;
 
-           _menu = setMenu;
+            _menu = setMenu;
         }
 
         public void CreateNew()

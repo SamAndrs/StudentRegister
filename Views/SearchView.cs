@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StudentRegister
+namespace StudentRegister.Views
 {
     public class SearchView
     {
@@ -19,7 +19,7 @@ namespace StudentRegister
 
         public void SearchByID()
         {
-            Int32.TryParse(_menu.ReadStringInput("Please enter student ID: "), out int id);
+            int.TryParse(_menu.ReadStringInput("Please enter student ID: "), out int id);
 
             if (_manager.GetStudentByID(id) != null)
             {
@@ -51,7 +51,7 @@ namespace StudentRegister
         public void SearchByLastName()
         {
             var students = _manager.GetStundentsByLastName(_menu.ReadStringInput("Please enter student Last Name, to search: "));
-            if (students.Count >0)
+            if (students.Count > 0)
             {
                 foreach (var student in students)
                 {
@@ -67,7 +67,7 @@ namespace StudentRegister
         public void SearchByCity()
         {
             var students = _manager.GetStundentsByCity(_menu.ReadStringInput("Please enter student City, to search: "));
-            if (students.Count>0)// != null)
+            if (students.Count > 0)// != null)
             {
                 foreach (var student in students)
                 {
