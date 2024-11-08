@@ -33,7 +33,7 @@ namespace StudentRegister.Views
                 string lName = _menu.ReadStringInput("Enter Student Last Name: ");
                 string city = _menu.ReadStringInput("Enter Student City Name: ");
 
-                ListStudentClasses();
+                //ListStudentClasses();
 
                 int sClass = Convert.ToInt32((_menu.ReadStringInput("Enter Student Class ID: ")));
 
@@ -49,7 +49,7 @@ namespace StudentRegister.Views
                 active = false;
             }
         }// End PrintCreateNewMenu()
-
+        
         private void ListStudentClasses(List<StudentClass> studentClasses)
         {
             foreach(var sClass in studentClasses)

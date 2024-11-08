@@ -16,9 +16,13 @@ namespace StudentRegister
 
         private StudentRepository _studentRepo;
 
-        public Manager(StudentRepository studentRepo)
+        private ClassRepository _classRepo;
+
+        public Manager(StudentRepository studentRepo, ClassRepository classRepo)
         {
-            _studentRepo = new StudentRepository(new StudentContext());
+            _studentRepo = studentRepo;
+
+            _classRepo = classRepo;
         }
 
         public void RunApp()

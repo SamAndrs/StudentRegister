@@ -12,6 +12,7 @@ namespace StudentRegister.RegistryClasses
 
         public List<StudentClass>? StudentClassList { get; set; }
 
+
         public ClassRepository(StudentContext dbContext)
         {
             _context = dbContext;

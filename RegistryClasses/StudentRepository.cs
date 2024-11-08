@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,7 +22,12 @@ namespace StudentRegister.RegistryClasses
 
         public void SelectAll()
         {
-           StudentList = _context.Students.Select(s => s).OrderByDescending(s => s.LastName).ToList();
+            foreach(var student in _context.Students.Select(s=>s).Include(c=>c.StudentClass))
+            {
+                StudentList.Add(student);
+            }
+            StudentList.OrderBy(i => i.StudentId).ThenByDescending(n => n.LastName);
+           //StudentList = _context.Students.Select(s => s).OrderBy(i => i.StudentId).ThenByDescending(s => s.LastName).ToList();
         }// End SelectAll()
 
         public object FindByID(int sID)
