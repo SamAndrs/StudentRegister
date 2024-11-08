@@ -1,12 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using StudentRegister.RegistryClasses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StudentRegister
+namespace StudentRegister.RegistryClasses
 {
     public class StudentContext : DbContext
     {
@@ -19,7 +18,7 @@ namespace StudentRegister
         {
             optionsBuilder.UseSqlServer(_connectionString);
         }
-        
+
         /*
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

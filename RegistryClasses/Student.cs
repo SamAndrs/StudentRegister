@@ -16,6 +16,8 @@ namespace StudentRegister.RegistryClasses
 
         public string? City { get; set; }
 
+        public StudentClass StudentClass { get; set; }
+
         public override string ToString()
         {
             return string.Format("{0, -8}{1,-15}{2,-25}{3,-10}", StudentId, FirstName, LastName, City);
