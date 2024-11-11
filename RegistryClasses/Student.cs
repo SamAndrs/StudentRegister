@@ -20,7 +20,7 @@ namespace StudentRegister.RegistryClasses
 
         public override string ToString()
         {
-            return string.Format("{0, -8}{1,-15}{2,-25}{3,-10}{3,-15}", StudentId, FirstName, LastName, City, StudentClass);
+            return string.Format("{0, -8}{1,-15}{2,-25}{3,-15}{4,-15}", StudentId, FirstName, LastName, City, StudentClass.ClassName);
             //return string.Format("{0, -8}{1,-15}{2,-25}{3,-10}", StudentId, FirstName, LastName, City);
         }
     }

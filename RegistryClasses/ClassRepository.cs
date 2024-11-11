@@ -36,7 +36,12 @@ namespace StudentRegister.RegistryClasses
 
         public void SelectAll()
         {
-            throw new NotImplementedException();
+            StudentClassList = new List<StudentClass>();
+            foreach(var sClass in _context.StudentClasses.Select(c=>c))
+            {
+                StudentClassList.Add(sClass);
+            }
+            StudentClassList.OrderBy(sc=>sc.StudentClassId).ThenBy(c=>c.ClassName);
         }
 
         public bool Update(object obj)

@@ -22,6 +22,7 @@ namespace StudentRegister.RegistryClasses
 
         public void SelectAll()
         {
+            StudentList = new List<Student>();
             foreach(var student in _context.Students.Select(s=>s).Include(c=>c.StudentClass))
             {
                 StudentList.Add(student);
