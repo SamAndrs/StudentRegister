@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StudentRegister
+namespace StudentRegister.RegistryClasses
 {
     public class Student
     {
@@ -16,9 +16,12 @@ namespace StudentRegister
 
         public string? City { get; set; }
 
+        public StudentClass StudentClass { get; set; }
+
         public override string ToString()
         {
-            return string.Format("{0, -8}{1,-15}{2,-25}{3,-10}",StudentId, FirstName, LastName, City);
+            return string.Format("{0, -8}{1,-15}{2,-25}{3,-15}{4,-15}", StudentId, FirstName, LastName, City, StudentClass.ClassName);
+            //return string.Format("{0, -8}{1,-15}{2,-25}{3,-10}", StudentId, FirstName, LastName, City);
         }
     }
 }

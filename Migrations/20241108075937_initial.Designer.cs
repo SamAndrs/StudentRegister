@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StudentRegister.RegistryClasses;
 
@@ -11,9 +12,11 @@ using StudentRegister.RegistryClasses;
 namespace StudentRegister.Migrations
 {
     [DbContext(typeof(StudentContext))]
-    partial class StudentContextModelSnapshot : ModelSnapshot
+    [Migration("20241108075937_initial")]
+    partial class initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -69,7 +72,7 @@ namespace StudentRegister.Migrations
 
                     b.HasKey("StudentClassId");
 
-                    b.ToTable("StudentClasses");
+                    b.ToTable("StudentClass");
                 });
 
             modelBuilder.Entity("StudentRegister.RegistryClasses.Student", b =>

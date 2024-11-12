@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StudentRegister
+namespace StudentRegister.Views
 {
     public class RemoveView
     {
@@ -22,7 +22,7 @@ namespace StudentRegister
         public void RemoveStudent()
         {
             Console.Clear();
-            Int32.TryParse(_menu.ReadStringInput("Please enter ID of student to remove: "), out int id);
+            int.TryParse(_menu.ReadStringInput("Please enter ID of student to remove: "), out int id);
 
             if (_manager.GetStudentByID(id) != null)
             {

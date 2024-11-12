@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using StudentRegister.RegistryClasses;
 
 namespace StudentRegister
 {
@@ -8,9 +9,11 @@ namespace StudentRegister
         {
             StudentContext studentRegistry = new StudentContext();
 
-            Repository studentRepo = new Repository(studentRegistry);
+            ClassRepository classRepo = new ClassRepository(studentRegistry);
 
-            Manager manager = new Manager(studentRepo);
+            StudentRepository studentRepo = new StudentRepository(studentRegistry);
+
+            Manager manager = new Manager(studentRepo, classRepo);
             manager.RunApp();
         }
     }

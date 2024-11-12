@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using StudentRegister.Views;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace StudentRegister
@@ -110,8 +111,8 @@ namespace StudentRegister
         private void ListAllMenu()
         {
             Console.Clear();
-            Console.WriteLine("{0, -8}{1,-15}{2,-25}{3,-10}", "ID", "First Name", "Last Name", "City");
-            Console.WriteLine(new string('=', 60) + "\n");
+            Console.WriteLine("{0, -8}{1,-15}{2,-25}{3,-15}{4,-15}", "ID", "First Name", "Last Name", "City", "Student Class");
+            Console.WriteLine(new string('=', 80) + "\n");
             // List All Students
             _manager.PrintStudentList();
             Console.WriteLine("\n1. Find Student By ID");
